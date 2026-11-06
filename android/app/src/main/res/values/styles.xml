@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The web app paints its own UI, so the shell stays light and flat. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/sk3d_bg</item>
+        <item name="android:statusBarColor">@color/sk3d_bg</item>
+        <item name="android:navigationBarColor">@color/sk3d_bg</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+</resources>

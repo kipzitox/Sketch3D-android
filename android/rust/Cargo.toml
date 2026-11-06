@@ -1,0 +1,29 @@
+[package]
+name = "sketch3d"
+version = "0.1.0"
+edition = "2021"
+description = "Sketch3D native Android shell (wry + tao)"
+publish = false
+
+[lib]
+name = "sketch3d"
+crate-type = ["cdylib", "staticlib", "rlib"]
+
+[dependencies]
+tao = "0.37"
+# "devtools" keeps chrome://inspect working on release builds too.
+wry = { version = "0.57", features = ["devtools"] }
+log = "0.4"
+
+[target.'cfg(target_os = "android")'.dependencies]
+android_logger = "0.13"
+jni = "0.21"
+
+[target.'cfg(not(target_os = "android"))'.dependencies]
+env_logger = "0.11"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true

@@ -1,0 +1,22 @@
+# ── Build output ────────────────────────────────────────────────────────────
+# The Android project has its own .gitignore; these are the top-level ones
+# that are easy to miss when building from the repo root.
+android/dist/
+android/.gradle/
+android/.kotlin/
+android/app/build/
+android/rust/target/
+android/app/src/main/assets/
+android/app/src/main/jniLibs/
+
+# ── Signing material — never commit ─────────────────────────────────────────
+android/keystore/
+*.keystore
+*.jks
+
+# ── Editor / OS noise ───────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
