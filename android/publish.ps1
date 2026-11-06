@@ -11,11 +11,11 @@
 
 .EXAMPLE
     .\publish.ps1
-    .\publish.ps1 -Repo notebysebas/Sketchbook-v6 -Tag v4.3-android -Notes "First Android build"
+    .\publish.ps1 -Repo kipzitox/Sketch3D-android -Tag v4.3-android -Notes "First Android build"
 #>
 [CmdletBinding()]
 param(
-    [string] $Repo = 'notebysebas/Sketchbook-v6',
+    [string] $Repo = 'kipzitox/Sketch3D-android',
     [string] $Tag = '',
     [string] $Notes = 'Sketch3D Android build (Rust/wry shell, offline, exports to Downloads)',
     [string[]] $Abis = @('arm64-v8a', 'armeabi-v7a', 'x86_64')

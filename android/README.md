@@ -99,12 +99,20 @@ keytool -genkeypair -v -keystore android\keystore\sketch3d-release.jks \
 
 ## Publishing
 
-Binaries do not belong in the git history — upload the APK as a release asset:
+Binaries do not belong in the git history — upload the APK as a release asset
+of **https://github.com/kipzitox/Sketch3D-android**:
 
 ```powershell
-gh release create v4.3-android .\dist\Sketch3D-v4.3-release.apk `
-  --title "Sketch3D v4.3 (Android)" --notes "Rust/wry shell, offline, exports to Downloads"
+# build + upload in one step (defaults to kipzitox/Sketch3D-android)
+.\publish.ps1
+
+# or against another repo / tag
+.\publish.ps1 -Repo kipzitox/Sketch3D-android -Tag v4.3-android -Notes "First Android build"
 ```
+
+`publish.ps1` verifies that the authenticated `gh` account has write access
+before building, then uploads `dist/Sketch3D-v4.3-release.apk` to the release
+(tag defaults to `v<versionName>-android`).
 
 `.github/workflows/android-apk.yml` does this automatically on every `v*` tag
 and also publishes the APK as a workflow artifact on each push.
