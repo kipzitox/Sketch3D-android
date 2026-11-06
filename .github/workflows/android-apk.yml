@@ -38,7 +38,9 @@ jobs:
           targets: aarch64-linux-android,armv7-linux-androideabi,x86_64-linux-android
 
       # Prebuilt cargo-ndk binary — much faster than `cargo install cargo-ndk`.
-      - uses: taiki-e/install-action@cargo-ndk
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-ndk
 
       - name: Build APK
         shell: pwsh
