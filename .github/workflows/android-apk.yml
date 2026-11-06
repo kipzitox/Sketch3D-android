@@ -6,6 +6,10 @@ on:
     tags: ['v*']
   workflow_dispatch:
 
+concurrency:
+  group: android-apk-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   apk:
     runs-on: windows-latest
@@ -15,18 +19,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Rust targets
-        run: |
-          rustup toolchain install stable --profile minimal
-          rustup target add aarch64-linux-android armv7-linux-androideabi x86_64-linux-android
-          cargo install cargo-ndk --locked
-
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
+      # The action's default package list ("tools") was removed from the SDK
+      # repository, so the packages are listed explicitly here. The NDK
+      # version must match $NdkVersion in android/build-apk.ps1.
       - uses: android-actions/setup-android@v3
+        with:
+          cmdline-tools-version: 11076708
+          packages: 'platform-tools platforms;android-35 build-tools;35.0.0 ndk;27.1.12297006'
+          log-accepted-android-sdk-licenses: true
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android,armv7-linux-androideabi,x86_64-linux-android
+
+      # Prebuilt cargo-ndk binary — much faster than `cargo install cargo-ndk`.
+      - uses: taiki-e/install-action@cargo-ndk
 
       - name: Build APK
         shell: pwsh
